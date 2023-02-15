@@ -1,0 +1,107 @@
+# ####################################
+# Basic training parameters for DEER #
+# ####################################
+
+seed: 929
+__set_seed: !!python/object/apply:torch.manual_seed [!ref <seed>]
+device: cuda
+
+exp_folder: ./
+data_folder: !ref <exp_folder>/msp-data
+output_folder: !ref <exp_folder>/exp
+save_folder: !ref <output_folder>/save
+train_log: !ref <output_folder>/train_log.txt
+label_file: !ref <data_folder>/msp-label.npy
+
+train_annotation: !ref <data_folder>/Train.json
+valid_annotation: !ref <data_folder>/Validation.json
+test_annotation: !ref <data_folder>/Test1.json
+
+train_logger: !new:speechbrain.utils.train_logger.FileTrainLogger
+    save_file: !ref <train_log>
+
+error_stats_std: !name:utils.MetricStats_std
+    metric: !name:utils.concordance_correlation_coefficient
+
+ckpt_interval_minutes: 15 # save checkpoint every 15 min
+
+# Training Parameters
+number_of_epochs: 40
+batch_size: 16
+lr_start: 0.001
+lr_final: 0.0005
+weight_decay: 0.001
+gradient_accumulation: 1
+
+# model Parameters
+input_dim: 768
+num_pretrain_layers: 12
+d_model: 128
+nhead: 4
+num_encoder_layers: 2
+dim_feedforward: 128
+dp: 0.3
+output_dim: 3 # v,a,d
+output_idx: 0 # used when output_dim == 1
+
+dataloader_options:
+    batch_size: !ref <batch_size>
+    shuffle: False
+    collate_fn: !name:speechbrain.dataio.batch.PaddedBatch
+        padded_keys: sig
+group_longest_first: True
+sorting: descending
+
+# SSL setting:
+freeze_SSL: True
+freeze_SSL_conv: True
+SSL_hub: "microsoft/wavlm-base-plus"
+output_all_hiddens: True
+
+# DEER configuration
+ref_only: False
+avg_label: True
+coeff_DEER: 0.1
+coeff_ref: 0.0
+
+# WavLM encoder
+SSLModel: !new:speechbrain.lobes.models.huggingface_wav2vec.HuggingFaceWav2Vec2
+    source: !ref <SSL_hub>
+    output_norm: False
+    freeze: !ref <freeze_SSL>
+    freeze_feature_extractor: !ref <freeze_SSL_conv>
+    output_all_hiddens: !ref <output_all_hiddens>
+    save_path: !ref <exp_folder>/SSL_checkpoint
+
+Transformer_model_DEER: !new:model.TransformerModel_DEER
+    input_dim: !ref <input_dim>
+    output_dim: !ref <output_dim>
+    num_pretrain_layers: !ref <num_pretrain_layers>
+    d_model: !ref <d_model>
+    nhead: !ref <nhead>
+    num_encoder_layers: !ref <num_encoder_layers>
+    dim_feedforward: !ref <dim_feedforward>
+    dp:  !ref <dp>
+    device: !ref <device>
+
+epoch_counter: !new:speechbrain.utils.epoch_loop.EpochCounter
+    limit: !ref <number_of_epochs>
+
+modules:
+    SSLModel: !ref <SSLModel>
+    model: !ref <Transformer_model_DEER>
+
+opt_class: !name:torch.optim.Adam
+    lr: !ref <lr_start>
+    weight_decay: !ref <weight_decay>
+
+lr_annealing: !new:speechbrain.nnet.schedulers.LinearScheduler
+    initial_value: !ref <lr_start>
+    final_value: !ref <lr_final>
+    epoch_count: !ref <number_of_epochs>
+
+checkpointer_DEER: !new:speechbrain.utils.checkpoints.Checkpointer
+    checkpoints_dir: !ref <save_folder>
+    recoverables:
+        Transformer_model: !ref <Transformer_model_DEER>
+        counter: !ref <epoch_counter>
