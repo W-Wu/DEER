@@ -1,3 +1,7 @@
+'''
+Generating json file for training and testing.
+'''
+
 import os
 import json
 from speechbrain.dataio.dataio import read_audio
