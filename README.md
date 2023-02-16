@@ -1,9 +1,8 @@
 # Deep Evidential Emotion Regression (DEER)
 
-Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression"
+Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression", a general approach for subjective tasks where a sample can have multiple different annotations.
 
-
-## Requirements
+## Setup
 PyTorch >= 1.11 (might also work on older versions)  
 SpeechBrain >= 0.5.13 (recommend using the latest version on [github](https://github.com/speechbrain/speechbrain))  
 numpy  
@@ -13,9 +12,9 @@ json
 1. `python3 data_preparation/msp-partition.py` -- prepare train/validation/test splits
 2. `python3 data_preparation/msp-label.py` -- prepare labels
 3. `python3 data_preparation/msp-data-json.py` -- prepare training scps  
-    Example json file: msp-data/Test1.json
+    Example json file in msp-data/Test1.json
 
-## Training:
+## Training
 `python3 DEER_train.py DEER_config.yaml --output_folder='exp'`  
   - Training log saved in exp/train_log.txt  
   - Model saved in exp/save  
@@ -28,7 +27,7 @@ json
   `utils.py` -- metrics, sampler, etc.  
 
   \* Training 110+ hours of MSP-Podcast data took aroud 5 hours on 1 NVIDIA A100 GPU.  
-  \* Users are encouraged to try different optimizers, schedulers, models, etc.
+  \* Users are encouraged to experiment with different optimizers, schedulers, models, etc.
 
-Scoring:
+Scoring
 `python3 scoring.py exp/test_outcome-E{PLACEHOLDER}.npy`
