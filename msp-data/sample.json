@@ -1,0 +1,27 @@
+{
+  "MSP-PODCAST_0147_0049.wav": {
+    "seg_name": "MSP-PODCAST_0147_0049.wav",
+    "fea_path": "/MSP-PODCAST-Publish-1.8/Audios_16k/MSP-PODCAST_0147_0049.wav",
+    "duration": 141884
+  },
+  "MSP-PODCAST_0147_0060.wav": {
+    "seg_name": "MSP-PODCAST_0147_0060.wav",
+    "fea_path": "/MSP-PODCAST-Publish-1.8/Audios_16k/MSP-PODCAST_0147_0060.wav",
+    "duration": 54819
+  },
+  "MSP-PODCAST_0147_0064.wav": {
+    "seg_name": "MSP-PODCAST_0147_0064.wav",
+    "fea_path": "/MSP-PODCAST-Publish-1.8/Audios_16k/MSP-PODCAST_0147_0064.wav",
+    "duration": 72554
+  },
+  "MSP-PODCAST_0147_0077.wav": {
+    "seg_name": "MSP-PODCAST_0147_0077.wav",
+    "fea_path": "/MSP-PODCAST-Publish-1.8/Audios_16k/MSP-PODCAST_0147_0077.wav",
+    "duration": 107058
+  },
+  "MSP-PODCAST_0147_0081.wav": {
+    "seg_name": "MSP-PODCAST_0147_0081.wav",
+    "fea_path": "/MSP-PODCAST-Publish-1.8/Audios_16k/MSP-PODCAST_0147_0081.wav",
+    "duration": 161876
+  }
+}
