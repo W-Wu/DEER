@@ -8,7 +8,7 @@ SpeechBrain >= 0.5.13 (recommend using the latest version on [github](https://gi
 numpy  
 json  
 
-## Data prepartion:
+## Data prepartion
 1. `python3 data_preparation/msp-partition.py` -- prepare train/validation/test splits
 2. `python3 data_preparation/msp-label.py` -- prepare labels
 3. `python3 data_preparation/msp-data-json.py` -- prepare training scps  
@@ -29,5 +29,5 @@ json
   \* Training 110+ hours of MSP-Podcast data took aroud 5 hours on 1 NVIDIA A100 GPU.  
   \* Users are encouraged to experiment with different optimizers, schedulers, models, etc.
 
-Scoring
+## Scoring
 `python3 scoring.py exp/test_outcome-E{PLACEHOLDER}.npy`
