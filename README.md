@@ -12,7 +12,7 @@ json
 1. `python3 data_preparation/msp-partition.py` -- prepare train/validation/test splits
 2. `python3 data_preparation/msp-label.py` -- prepare labels
 3. `python3 data_preparation/msp-data-json.py` -- prepare training scps  
-    Example json file in msp-data/Test1.json
+    Example json file in msp-data/sample.json
 
 ## Training
 `python3 DEER_train.py DEER_config.yaml --output_folder='exp'`  
