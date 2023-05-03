@@ -4,7 +4,7 @@ Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential
 
 ## Setup
 PyTorch >= 1.11 (might also work on older versions)  
-SpeechBrain >= 0.5.13
+SpeechBrain >= 0.5.13   
 numpy  
 json  
 
