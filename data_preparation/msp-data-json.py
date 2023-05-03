@@ -3,7 +3,7 @@ DEER
 Code for generating json file for training and testing.
 
 Author:
-    Wen Wu 2022
+    Wen 2022
 '''
 
 import os
