@@ -1,3 +1,10 @@
+'''
+DEER
+Utils
+
+Author: Wen 2022
+'''
+
 import torch
 import torch.nn as nn
 from torch.utils import data
@@ -31,7 +38,7 @@ def CCC_loss(predictions, targets, length=None):
 
 class MetricStats_std:
     """
-    Self-defined class for storing and summarizing predictions and std.
+    Storing and summarizing predictions and std.
     """
     def __init__(self, metric, n_jobs=1, batch_eval=True):
         self.metric = metric
@@ -55,9 +62,9 @@ class MetricStats_std:
         avg_stds = sum(self.stds)/len(self.stds)
         return scores.item(),avg_stds.item()
 
+    
+# adapted from huggingface
 def get_length_grouped_indices(lengths, batch_size, mega_batch_mult=None, generator=None,longest_first=False):
-    # adapted from huggingface
-
     if mega_batch_mult is None:
         mega_batch_mult = min(len(lengths) // (batch_size * 4), 50)
         if mega_batch_mult == 0:
