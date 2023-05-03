@@ -1,6 +1,7 @@
 '''
 Code for deep evidential emotion regression (DEER)
 
+Author: Wen 2022
 '''
 
 import torch
