@@ -27,7 +27,6 @@ json
   `model.py` -- model class  
   `utils.py` -- metrics, sampler, etc.  
 
-  \* Training 110+ hours of MSP-Podcast data took aroud 5 hours on 1 NVIDIA A100 GPU.  
   \* Users are encouraged to experiment with different optimizers, schedulers, models, etc.
 
 ## Scoring
