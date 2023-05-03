@@ -23,6 +23,7 @@ json
   
   `DEER_train.py` -- training script  
   `DEER_config.yaml` -- training configuration  
+  `deep_evidential_emotion_regression.py` -- DEER loss and evidential layer  
   `model.py` -- model class  
   `utils.py` -- metrics, sampler, etc.  
 
