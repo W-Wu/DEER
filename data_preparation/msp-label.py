@@ -1,5 +1,9 @@
 '''
-Prepare labels
+DEER
+Code for preparing labels
+
+Author:
+    Wen Wu 2022
 '''
 
 import os
