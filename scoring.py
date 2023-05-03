@@ -1,3 +1,10 @@
+'''
+DEER
+Code for scoring
+
+Author: Wen 2022
+'''
+
 import numpy as np
 import torch
 from torch.distributions import Normal
