@@ -1,5 +1,8 @@
 """
-Downstream Transformer model
+DEER
+Code for downstream Transformer model
+
+deep_evidential_emotion_regression.py
 """
 import torch
 import torch.nn as nn
