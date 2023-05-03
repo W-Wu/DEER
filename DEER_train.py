@@ -1,5 +1,8 @@
 """
-DEER training script
+DEER
+Training script
+
+Author: Wen 2022
 """
 import os
 import sys
@@ -128,7 +131,7 @@ class DEER_Brain(sb.Brain):
                          ref_only=self.hparams.ref_only,
                         )
 
-        loss = torch.sum(loss) # can introduce weights here
+        loss = torch.sum(loss)
         self.deer_loss += loss
 
         mu, v, alpha, beta = torch.split(predictions, int(predictions.shape[-1]/4), dim=-1)
@@ -141,7 +144,7 @@ class DEER_Brain(sb.Brain):
         else:
             if stage == sb.Stage.TRAIN:
                 loss_all = torch.stack([1.0 - CCC_loss(targets=label_ref[:,i],predictions=mu[:,i]) for i in range(self.hparams.output_dim)])
-                loss_CCC = sum(loss_all)    # can introduce weights here
+                loss_CCC = sum(loss_all)
             for i in range(self.hparams.output_dim):
                 self.CCC_metrics[i].append(batch.id, targets=label_ref[:,i], predictions=mu[:,i], stds = pred_std[:,i])
 
@@ -153,7 +156,7 @@ class DEER_Brain(sb.Brain):
 
         if stage != sb.Stage.TRAIN:
             return loss
-        self.CCC_loss += loss_CCC
+        self.CCC_loss += loss_CCC   # CCC loss used for mcdp and ensemble
         return loss
 
 
