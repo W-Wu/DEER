@@ -1,3 +1,11 @@
+'''
+DEER
+Code for splitting train/validation/test data.
+
+Author:
+    Wen 2022
+'''
+
 import numpy as np
 
 file_path="/MSP-PODCAST-Publish-1.8/Partitions.txt"
