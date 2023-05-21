@@ -1,6 +1,6 @@
 # Deep Evidential Emotion Regression (DEER)
 
-Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression", a general approach for subjective tasks where a sample can have multiple different annotations.
+Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression". A general approach for tasks with subjective annotations.
 
 ## Setup
 PyTorch == 1.11   
