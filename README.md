@@ -3,8 +3,8 @@
 Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression", a general approach for subjective tasks where a sample can have multiple different annotations.
 
 ## Setup
-PyTorch = 1.11   
-SpeechBrain = 0.5.13   
+PyTorch == 1.11   
+SpeechBrain == 0.5.13   
 
 ## Data prepartion
 1. `data_preparation/msp-partition.py` -- prepare train/validation/test splits
