@@ -53,12 +53,12 @@ def NIG_Reg_phi(y, gamma, v, alpha, beta, reduce=False):
 def DEER_loss(label, label_ref, label_mask,evidential_output, avg_rater=True, coeff_reg=1.0,ref_only=False,coeff_ref=0.0):
     B,num_rater,output_dim=label.size()
     label_var = torch.var(label,dim=1)
-    gamma, v, alpha, beta = torch.split(evidential_output, int(evidential_output.shape[-1]/4), dim=-1)
+    gamma, v, alpha, beta = torch.split(evidential_output, int(evidential_output.shape[-1]/4), dim=-1)  #gamma.shape: [batch_size,output_dim]
     aleatoric = beta /  (alpha - 1)
 
-    loss_reg = NIG_Reg_phi(label_ref, gamma, v, alpha, beta) + NIG_Reg_phi(label_var, aleatoric, v, alpha, beta)
+    loss_reg = NIG_Reg_phi(label_ref, gamma, v, alpha, beta) + NIG_Reg_phi(label_var, aleatoric, v, alpha, beta) 
 
-    loss_nll_ref = NIG_NLL(label_ref, gamma, v, alpha, beta)
+    loss_nll_ref = NIG_NLL(label_ref, gamma, v, alpha, beta)    
 
     if ref_only:
         return loss_nll_ref + coeff_reg * loss_reg
@@ -66,14 +66,15 @@ def DEER_loss(label, label_ref, label_mask,evidential_output, avg_rater=True, co
     loss_nll_all = 0
     for r_idx in range(num_rater):
         if len(label.shape)<=2:
-            loss_r = NIG_NLL(label[:,r_idx], gamma, v, alpha, beta)
+            loss_r = NIG_NLL(label[:,r_idx], gamma, v, alpha, beta) 
         else:
             loss_r = NIG_NLL(label[:,r_idx,:], gamma, v, alpha, beta)
-        loss_nll_all += loss_r*label_mask[:,r_idx].unsqueeze(-1)
+        loss_nll_all += loss_r*label_mask[:,r_idx].unsqueeze(-1)    
         
     if avg_rater:
         loss_nll_all /=torch.sum(label_mask,-1,keepdim=True)  
 
+    #loss_*.shape: [batch_size,output_dim]
     return loss_nll_all + coeff_reg * loss_reg + coeff_ref * loss_nll_ref
 
 
