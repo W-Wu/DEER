@@ -59,7 +59,7 @@ output_all_hiddens: True
 
 # DEER configuration
 ref_only: False
-avg_label: True
+avg_rater: True
 coeff_DEER: 0.1
 coeff_ref: 0.0
 
