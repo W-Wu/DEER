@@ -72,9 +72,7 @@ def DEER_loss(label, label_ref, label_mask,evidential_output, avg_rater=True, co
         loss_nll_all += loss_r*label_mask[:,r_idx].unsqueeze(-1)
         
     if avg_rater:
-        loss_nll_all = sum(loss_nll_all/torch.sum(label_mask,-1,keepdim=True).expand(B,output_dim))    
-    else:
-        loss_nll_all = sum(loss_nll_all) 
+        loss_nll_all /=torch.sum(label_mask,-1,keepdim=True)  
 
     return loss_nll_all + coeff_reg * loss_reg + coeff_ref * loss_nll_ref
 
