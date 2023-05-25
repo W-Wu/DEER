@@ -127,7 +127,7 @@ class DEER_Brain(sb.Brain):
                          evidential_output=predictions, 
                          coeff_reg=self.hparams.coeff_DEER, 
                          coeff_ref=self.hparams.coeff_ref,
-                         avg_label=self.hparams.avg_label,
+                         avg_rater=self.hparams.avg_rater,
                          ref_only=self.hparams.ref_only,
                         )
 
