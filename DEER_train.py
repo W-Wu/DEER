@@ -254,7 +254,8 @@ if __name__ == "__main__":
     # Load hyperparameters file with command-line overrides.
     ruamel_yaml = ruamel.yaml.YAML()
     overrides = ruamel_yaml.load(overrides)
-    overrides.update({'device': run_opts['device']})
+    if overrides:
+        overrides.update({'device': run_opts['device']})
     
     with open(hparams_file) as fin:
         hparams = load_hyperpyyaml(fin, overrides)
