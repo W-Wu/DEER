@@ -50,7 +50,6 @@ dataloader_options:
     collate_fn: !name:speechbrain.dataio.batch.PaddedBatch
         padded_keys: sig
 group_longest_first: True
-sorting: descending
 
 # SSL setting:
 freeze_SSL: True
