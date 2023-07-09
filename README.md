@@ -1,7 +1,9 @@
 # Deep Evidential Emotion Regression (DEER) :deer:
 
 Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression".  
-[Paper](https://arxiv.org/abs/2306.06760)
+
+
+[Paper](https://aclanthology.org/2023.acl-long.873)  
 
 Please cite:  
 
