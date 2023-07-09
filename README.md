@@ -3,6 +3,20 @@
 Code for "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression".  
 [Paper](https://arxiv.org/abs/2306.06760)
 
+Please cite:  
+
+>@inproceedings{wu-etal-2023-estimating,  
+>    title = "Estimating the Uncertainty in Emotion Attributes using Deep Evidential Regression",  
+>    author = "Wu, Wen  and Zhang, Chao  and  Woodland, Philip",  
+>    booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",  
+>    month = jul,  
+>    year = "2023",  
+>    address = "Toronto, Canada",  
+>    publisher = "Association for Computational Linguistics",  
+>    url = "https://aclanthology.org/2023.acl-long.873",  
+>    pages = "15681--15695",  
+>    }
+
 ## Setup
 PyTorch == 1.11   
 SpeechBrain == 0.5.13   
