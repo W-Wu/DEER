@@ -13,6 +13,7 @@ import ruamel.yaml
 import numpy as np
 import speechbrain as sb
 from hyperpyyaml import load_hyperpyyaml
+from speechbrain.dataio.dataio import length_to_mask
 
 from deep_evidential_emotion_regression import *
 from utils import *
@@ -70,12 +71,21 @@ class DEER_Brain(sb.Brain):
             outputs=outputs.transpose(0,1)
         # print(outputs.shape) #[B, T, 12, 768]
 
-        pred = self.modules.model(outputs)
+        src_key_padding_mask = self.make_masks(outputs,wav_len=lens)
+
+        pred = self.modules.model(outputs,src_key_padding_mask=~src_key_padding_mask)
         if self.hparams.output_dim == 1:
             return pred.squeeze(-1)
         else:
             return pred
-
+            
+    def make_masks(self, src, wav_len=None, pad_idx=0):
+        src_key_padding_mask = None
+        if wav_len is not None:
+            abs_len = torch.round(wav_len * src.shape[1])
+            src_key_padding_mask = length_to_mask(abs_len).bool()
+        return src_key_padding_mask
+        
     def check_nan(self,label_ref):
         label_ref = label_ref.transpose(0,1)
         for i, row in enumerate(label_ref):
