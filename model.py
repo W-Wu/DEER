@@ -40,7 +40,7 @@ class TransformerModel_DEER(nn.Module):
         self.output_dim = output_dim
         self.device = device
 
-    def forward(self, hidden_states):
+    def forward(self, hidden_states,src_key_padding_mask=None):
         # PaddedData.data: torch.Size([B, T, 12, 768])
         norm_weights=nn.functional.softmax(self.layer_weights, dim=-1)
         src=(hidden_states*norm_weights.view(1, 1, -1, 1)).sum(dim=2)      # torch.Size([B, T, 768])
@@ -48,7 +48,7 @@ class TransformerModel_DEER(nn.Module):
         src = src.permute(1,0,2)        # torch.Size([T, B, 768])
         src = self.fc_embed(src)
         src = self.pos_encoder(src)    
-        output = self.transformer_encoder(src)        # torch.Size([T, B, 256])
+        output = self.transformer_encoder(src,src_key_padding_mask=src_key_padding_mask)        # torch.Size([T, B, 256])
 
         # mean pooling
         output = torch.mean(output,dim=0)        # torch.Size([B, 256])
